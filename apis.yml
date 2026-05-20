@@ -1,6 +1,11 @@
 aid: zillow-group
 url: >-
   https://raw.githubusercontent.com/api-evangelist/zillow-group/refs/heads/main/apis.yml
+common:
+  - type: GitHubOrganization
+    url: https://github.com/zillow
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/zillow-group
 apis:
   - aid: zillow-group:zillow-group
     name: Zillow Group
