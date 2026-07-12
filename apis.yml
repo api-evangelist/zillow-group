@@ -2,10 +2,14 @@ aid: zillow-group
 url: >-
   https://raw.githubusercontent.com/api-evangelist/zillow-group/refs/heads/main/apis.yml
 common:
+  - type: DomainSecurity
+    url: security/zillow-group-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/zillow
   - type: LinkedIn
     url: https://www.linkedin.com/company/zillow-group
+  - url: https://www.zillowgroup.com/feed/
+    type: Blog
 apis:
   - aid: zillow-group:zillow-group
     name: Zillow Group
