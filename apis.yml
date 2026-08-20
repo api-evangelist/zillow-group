@@ -14,6 +14,8 @@ apis:
   - aid: zillow-group:zillow-group
     name: Zillow Group
     tags:
+      - Real-Estate
+    tags_raw:
       - Real Estate
     humanURL: https://www.zillowgroup.com/developers/
     properties:
@@ -28,6 +30,8 @@ apis:
       with mortgage lenders.
 name: Zillow Group
 tags:
+  - Real-Estate
+tags_raw:
   - Real Estate
 type: Index
 accessModel:
