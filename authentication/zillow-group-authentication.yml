@@ -1,0 +1,91 @@
+generated: '2026-08-28'
+method: searched
+source: https://www.zillowgroup.com/developers/
+description: >-
+  Authentication profile for the Zillow Group API surface, read from the per-API fact panels
+  Zillow Group publishes on its own developer portal. There is no single Zillow Group auth
+  model: the portal is a directory over four separately-operated platforms, each with its own
+  scheme. No securityScheme could be derived from a specification, because Zillow Group
+  publishes no OpenAPI, Swagger, GraphQL SDL or AsyncAPI document on any host.
+derived_from_spec: false
+schemes:
+  - id: bridge-bearer-token
+    type: http
+    scheme: bearer
+    label: Bridge access token (server token)
+    applies_to:
+      - Zestimate API
+      - Public Records API
+      - MLS Listings API
+      - Reviews API
+      - Zillow Agent Reviews API
+    docs: https://bridgedataoutput.com/docs/platform
+    evidence: >-
+      Zillow Group's own API pages state "Password and access token authentication" and route
+      access-token issuance to the Bridge dashboard: "Your access tokens can also be found on
+      your Bridge Dashboard under Data Access > API Access Tokens."
+    onboarding: >-
+      Register at https://bridgedataoutput.com/register, then API Access > Request Data Access
+      > Zillow Group Datasets > agree to the Zillow Data Terms of Use > apply for the dataset.
+    note: >-
+      Served by Bridge Interactive, a Zillow Group company; Zillow Group's own developer portal
+      names bridgedataoutput.com as the reference for these APIs, which is why a different
+      domain appears here.
+  - id: mortech-license-key
+    type: apiKey
+    in: body
+    label: Third Party Name + License Key
+    applies_to:
+      - Rate Cloud API
+      - Prospect Sync API
+      - Prospect Trigger API
+      - Lead Posting API
+      - LOS Plug-In Integration API
+    docs: https://www.zillowgroup.com/developers/mortgage/
+    evidence: >-
+      Every Mortech-powered mortgage API page publishes the same authentication value,
+      "Third Party Name, License Key", with HTTP POST requests and XML responses.
+    onboarding: Request-access form; agreement type is "Partner/MSA".
+  - id: dotloop-oauth2
+    type: oauth2
+    label: OAuth 2.0 three-legged authorization code
+    applies_to:
+      - Transaction Management API
+    docs: https://dotloop.github.io/public-api/
+    authorization_url: https://auth.dotloop.com/oauth/authorize
+    token_url: https://auth.dotloop.com/oauth/token
+    revocation_url: https://auth.dotloop.com/oauth/token/revoke
+    token_lifetime: 12 hours (refresh token required thereafter)
+    bearer_header: 'Authorization: Bearer <access token>'
+    client_registration: http://info.dotloop.com/developers
+    evidence: >-
+      Zillow Group's Transaction Management page states "OAuth 2.0 / 3-legged OAuth"; the
+      linked dotloop Public API v2 guide documents the authorize/token/revoke endpoints and a
+      Basic-auth client credential on the /token call.
+    note: >-
+      Served by dotloop, a Zillow Group company, and profiled in depth in its own repo
+      (all/dotloop). Recorded here because Zillow Group lists it as one of its own developer
+      APIs at https://www.zillowgroup.com/developers/api/transactions/transaction-management/.
+  - id: rentals-webhook-callback
+    type: none
+    label: No inbound authentication documented
+    applies_to:
+      - Rentals Lead API
+    docs: https://s3.amazonaws.com/files.hotpads.com/+guides/Lead+API+Guide.pdf
+    evidence: >-
+      The Lead API delivers URL-encoded HTTP POST callbacks to a customer-supplied webhook
+      endpoint. Zillow Group's page documents no signing, shared secret or mutual TLS for
+      those callbacks, and states "we are unable to make changes to our API fields or form".
+    gap: true
+unauthenticated_surfaces:
+  - name: Zillow Research data (Real Estate Metrics, Neighborhood Data)
+    url: https://www.zillow.com/research/data/
+    style: CSV download, no key
+    note: Free for public use; a download portal rather than a keyed API.
+gaps:
+  - No OAuth scope reference is published at the Zillow Group level; only the dotloop subsidiary documents scopes.
+  - No API key rotation, expiry or revocation policy is published for the Bridge or Mortech schemes.
+  - Rentals Lead API webhook deliveries carry no documented signature, so a receiver cannot verify origin.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

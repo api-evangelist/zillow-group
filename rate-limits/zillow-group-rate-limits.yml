@@ -4,85 +4,49 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Zillow Group
 providerId: zillow-group
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-08-28'
+modified: '2026-08-28'
+method: searched
+source: https://www.zillowgroup.com/developers/
+# 2026-08-28: this file previously carried a bulk-sweep SCAFFOLD (free 10/min, pro 100/min,
+# enterprise 1000/min) that Zillow Group has never published. Those numbers were fabricated
+# and have been removed. Every one of the seventeen API pages on
+# https://www.zillowgroup.com/developers/ was read on 2026-08-28; not one states a quota, a
+# window, a burst ceiling, a 429 behaviour or a rate-limit response header.
 tags:
   - Real Estate
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Zillow Group API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Zillow Group
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Zillow Group
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Zillow Group
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Zillow Group
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Zillow Group
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+description: >-
+  Published rate limits for the Zillow Group API surface. There are none. Zillow Group
+  documents no quota, no window, no burst, no exhaustion status code and no rate-limit
+  response headers on any of the seventeen APIs listed on its developer portal — which means
+  a client cannot size an integration, and an agent has no runtime signal to back off on.
+limit_count: 0
+limits: []
+headers: {}
+responseCodes: {}
+policies: []
+evidence:
+  - url: https://www.zillowgroup.com/developers/
+    status: 200
+    note: Portal index — seven programs, seventeen APIs, no rate-limit section.
+  - url: https://www.zillowgroup.com/developers/api/zestimate/zestimates-api/
+    status: 200
+    note: Fact panel gives auth, style and formats only; no limits.
+  - url: https://www.zillowgroup.com/developers/api/mortgage/rate-cloud-api/
+    status: 200
+    note: >-
+      States capacity as marketing prose — "respond to millions of quotes per hour" — with no
+      per-client limit, window or header. Deliberately not recorded as a limit.
+  - url: https://www.zillowgroup.com/developers/api/rentals/lead-api/
+    status: 200
+    note: Webhook delivery API; no limits and no retry policy stated.
+subsidiary_limits_note: >-
+  The only published rate limit reachable from this portal belongs to a subsidiary: the dotloop
+  Public API v2 documents 100 requests per minute per client application per user, a 429 on
+  exhaustion, and X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset response
+  headers. That is dotloop's contract, recorded in all/dotloop, and is deliberately NOT counted
+  as a Zillow Group limit here.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

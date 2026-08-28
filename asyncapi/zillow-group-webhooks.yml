@@ -1,0 +1,90 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://www.zillowgroup.com/developers/api/rentals/lead-api/,
+  https://www.zillowgroup.com/developers/api/mls-broker-data/reviews-api/,
+  https://dotloop.github.io/public-api/
+description: >-
+  Event and webhook surface for Zillow Group. Zillow Group advertises webhook delivery on its
+  own developer portal but publishes no AsyncAPI document and no public event catalog for its
+  own callbacks; the only enumerated event catalog on the surface belongs to the dotloop
+  subsidiary. This file captures the webhook surface itself so the event posture is recorded
+  rather than dropped.
+asyncapi_spec_published: false
+asyncapi_probe:
+  note: >-
+    /asyncapi.yaml, /asyncapi.json and an event-catalog page were not found on any Zillow Group
+    or subsidiary host; the well-known probe on 2026-08-28 returned 404/401/403 across all seven
+    hosts. See well-known/zillow-group-well-known.yml.
+webhooks:
+  - name: Zillow Rentals Lead API
+    owner: Zillow Group (Zillow Rentals)
+    direction: outbound (Zillow POSTs to a customer-supplied endpoint)
+    transport: HTTPS POST callback
+    payload_encoding: application/x-www-form-urlencoded
+    signature: null
+    signature_note: >-
+      No signing secret, HMAC header or mutual TLS is documented — a receiver has no published
+      way to verify that a lead delivery actually came from Zillow.
+    retry_policy: not documented
+    event_catalog_published: false
+    docs: https://www.zillowgroup.com/developers/api/rentals/lead-api/
+    guide: https://s3.amazonaws.com/files.hotpads.com/+guides/Lead+API+Guide.pdf
+    guide_probe:
+      url: https://s3.amazonaws.com/files.hotpads.com/+guides/Lead+API+Guide.pdf
+      status: 200
+      bytes: 258680
+      note: >-
+        The only integration guide for this API is a PDF on S3 — machine-unreadable, and the
+        reason this surface has no structured event catalog here.
+    provider_constraint: >-
+      Zillow Group states "Our data format is URL-encoded and we are unable to make changes to
+      our API fields or form."
+    onboarding: rentalfeeds@zillow.com for new integrations; existing CRMs via Rentals Support.
+  - name: Zillow Reviews API notifications
+    owner: Zillow Group (via Bridge Interactive)
+    direction: outbound notification on review creation
+    transport: not documented
+    event_catalog_published: false
+    docs: https://www.zillowgroup.com/developers/api/mls-broker-data/reviews-api/
+    evidence: >-
+      Zillow Group describes the capability as "get notified when a new review is created by a
+      prospect" but publishes no delivery mechanism, payload shape or event names.
+  - name: dotloop Transaction Management webhooks
+    owner: dotloop (a Zillow Group company)
+    direction: outbound HTTPS POST to a subscription URL
+    transport: HTTPS POST, JSON
+    status: Initial Release
+    signature: 'X-DOTLOOP-SIGNATURE (HMAC over "<X-DOTLOOP-TIMESTAMP>.<raw body>") + X-DOTLOOP-TIMESTAMP'
+    delivery_timeout: 5 seconds
+    event_retention: 90 days
+    event_count: 16
+    events:
+      - LOOP_CREATED
+      - LOOP_UPDATED
+      - LOOP_MERGED
+      - LOOP_PARTICIPANT_CREATED
+      - LOOP_PARTICIPANT_UPDATED
+      - LOOP_PARTICIPANT_DELETED
+      - CONTACT_CREATED
+      - CONTACT_UPDATED
+      - CONTACT_DELETED
+      - PROFILE_UPDATED
+      - USER_PROFILE_ACTIVATED
+      - USER_PROFILE_DEACTIVATED
+      - USER_ADDED_TO_PROFILE
+      - USER_REMOVED_FROM_PROFILE
+      - SUBSCRIPTION_REMOVED
+      - SUBSCRIPTION_DISABLED
+    docs: https://dotloop.github.io/public-api/
+    note: >-
+      Recorded here because Zillow Group lists Transaction Management as one of its own
+      developer APIs. The full subscription/event API is profiled in all/dotloop; this entry is
+      the Zillow Group portal's view of it, not a duplicate of that profile.
+gaps:
+  - No AsyncAPI document for any event surface.
+  - Zillow Group's own two webhook surfaces publish no event names and no payload schema.
+  - The Rentals Lead API delivers unsigned callbacks, and its only guide is a PDF.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

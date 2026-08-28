@@ -1,0 +1,135 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  npm registry.npmjs.org, pypi.org/pypi/<pkg>/json, proxy.golang.org and github.com/zillow,
+  cross-read against https://www.zillowgroup.com/developers/
+description: >-
+  First-party published packages from Zillow Group. THE HEADLINE FINDING IS A NEGATIVE:
+  Zillow Group publishes NO client SDK for any of the seventeen APIs listed on its own
+  developer portal. Every API on https://www.zillowgroup.com/developers/ is documented in
+  prose with a "Request Access" form and no accompanying client library in any registry.
+  The packages below are real, first-party, and published under the github.com/zillow org,
+  but they are general-purpose open source (ML, Kafka, Go/React utilities) — none of them
+  wraps a Zillow Group API. No `SDKs` pointer is emitted for that reason; emitting one
+  would credit Zillow Group with an integration ergonomic it does not ship.
+sdk_count: 0
+api_client_libraries: []
+open_source_packages:
+  - language: python
+    registry: pypi
+    name: quantile-forest
+    url: https://pypi.org/project/quantile-forest/
+    install: pip install quantile-forest
+    official: true
+    api_client: false
+    version: 1.4.2
+    published: '2026-06-21'
+    note: Quantile Regression Forests compatible with scikit-learn; the most actively maintained Zillow OSS package.
+  - language: python
+    registry: pypi
+    name: luminaire
+    url: https://pypi.org/project/luminaire/
+    install: pip install luminaire
+    official: true
+    api_client: false
+    version: 0.4.3
+    published: '2024-01-31'
+    note: ML-driven time-series anomaly monitoring; 809 GitHub stars, last release over two years old.
+  - language: python
+    registry: pypi
+    name: zdatasets
+    url: https://pypi.org/project/zdatasets/
+    install: pip install zdatasets
+    official: true
+    api_client: false
+    version: 1.3.0
+    published: '2026-02-02'
+    note: Internal dataset SDK for batch/online/streaming reads and writes — not a Zillow Group API client.
+  - language: python
+    registry: pypi
+    name: battenberg
+    url: https://pypi.org/project/battenberg/
+    install: pip install battenberg
+    official: true
+    api_client: false
+    version: 0.5.2
+    published: '2024-11-14'
+  - language: python
+    registry: pypi
+    name: ctds
+    url: https://pypi.org/project/ctds/
+    install: pip install ctds
+    official: true
+    api_client: false
+    version: 1.14.0
+    published: '2021-03-29'
+    note: DB-API 2.0 driver for SQL Server; no release in five years.
+  - language: python
+    registry: pypi
+    name: hyper-kube-config
+    url: https://pypi.org/project/hyper-kube-config/
+    install: pip install hyper-kube-config
+    official: true
+    api_client: false
+    version: 0.6.2
+    published: '2021-02-24'
+  - language: go
+    registry: proxy.golang.org
+    name: github.com/zillow/zkafka
+    url: https://pkg.go.dev/github.com/zillow/zkafka
+    install: go get github.com/zillow/zkafka
+    official: true
+    api_client: false
+    version: v1.3.0
+    published: '2024-09-25'
+  - language: go
+    registry: proxy.golang.org
+    name: github.com/zillow/zfmt
+    url: https://pkg.go.dev/github.com/zillow/zfmt
+    install: go get github.com/zillow/zfmt
+    official: true
+    api_client: false
+    version: v1.0.1
+    published: '2024-07-22'
+  - language: go
+    registry: proxy.golang.org
+    name: github.com/zillow/go-strcase
+    url: https://pkg.go.dev/github.com/zillow/go-strcase
+    install: go get github.com/zillow/go-strcase
+    official: true
+    api_client: false
+    version: v0.4.0
+    published: '2024-05-06'
+  - language: javascript
+    registry: npm
+    name: react-slider
+    url: https://www.npmjs.com/package/react-slider
+    install: npm install react-slider
+    official: true
+    api_client: false
+    version: 2.0.6
+    published: '2023-06-27'
+    note: Accessible CSS-agnostic React slider; 913 stars, no release in three years.
+  - language: javascript
+    registry: npm
+    name: auto-mobile
+    url: https://www.npmjs.com/package/auto-mobile
+    install: npm install auto-mobile
+    official: true
+    api_client: false
+    version: 0.0.5
+    published: '2025-07-22'
+    note: >-
+      Mobile device interaction automation via MCP. Zillow ARCHIVED github.com/zillow/auto-mobile
+      and states it "is no longer maintained or supported by Zillow", pointing to a community
+      fork. See mcp/zillow-group-mcp.yml — this is the only MCP server Zillow ever published and
+      it does not expose any Zillow Group API.
+third_party_wrappers_noted:
+  - note: >-
+      npm carries `zillow` (1.0.0, 2016-12-27) and `zillow-api` (1.0.0, 2016-12-27) and
+      `dotloop` (0.0.1, 2015-12-14, github.com/bshamblen/dotloop). None are published by
+      Zillow Group; all three predate the 2021 retirement of the Zillow Web Services API and
+      are recorded here only so they are not mistaken for first-party SDKs.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

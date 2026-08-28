@@ -1,0 +1,80 @@
+generated: '2026-08-28'
+method: searched
+source: https://www.zillowgroup.com/developers/
+description: >-
+  Lifecycle posture for the Zillow Group API surface: versioning, deprecation, status
+  reporting and SLA. The dominant lifecycle fact about this provider is a retirement, not a
+  release — the public Zillow Web Services API (Zestimate, GetSearchResults, GetDeepSearchResults)
+  is gone from the developer portal, and everything that replaced it is invite-only.
+versioning:
+  scheme: per-platform, not per-company
+  documented: false
+  note: >-
+    Zillow Group publishes no versioning policy of its own. Of the four platforms behind the
+    portal, only the dotloop-served Transaction Management API carries a version in its path
+    (/public/v2); the Bridge-served APIs version by dataset, and the Mortech mortgage APIs
+    publish no version at all.
+  evidence: https://www.zillowgroup.com/developers/
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy, notice window, Sunset/Deprecation header support or migration guide
+    is published anywhere on https://www.zillowgroup.com/developers/. No `Deprecation` pointer
+    is emitted.
+retirements:
+  - name: Zillow Web Services API
+    surface: Zestimate, GetSearchResults, GetDeepSearchResults, GetUpdatedPropertyDetails
+    retired: '2021-09-30'
+    status: retired
+    confidence: medium
+    evidence: >-
+      Verified by absence: the Zillow Group developer portal fetched 2026-08-28 lists seven
+      programs and seventeen APIs, and the public Web Services API appears in none of them.
+      Zestimate access is now routed through the Bridge platform under an invite-only Zillow
+      Group Datasets agreement. The retirement date is from third-party reporting rather than a
+      first-party Zillow notice, because the original announcement page is no longer served.
+    consequence: >-
+      This is the single most consequential lifecycle event in the repo. A once-open,
+      self-serve public API became a request-access enterprise data agreement, and every
+      third-party "Zillow API" now on the market is an unaffiliated scraper or wrapper.
+status_page:
+  published: false
+  probed:
+    - url: https://status.zillow.com/
+      status: '000 (DNS does not resolve)'
+    - url: https://status.zillowgroup.com/
+      status: '000 (DNS does not resolve)'
+  note: >-
+    Zillow Group operates no public status or incident page for its API surface. No `StatusPage`
+    pointer is emitted.
+sla:
+  published: false
+  note: >-
+    No uptime commitment or support-response SLA is published. Access agreements are named on
+    the portal ("Partner/MSA", "Terms of Use, Branding Requirements", "dotloop Connect") but
+    their terms are not public.
+support:
+  channels:
+    - name: Rentals support
+      url: https://help.zillowrentalmanager.com/hc/en-us
+      note: 'Probed 2026-08-28: 403 from a browser user-agent (PerimeterX edge), page exists.'
+    - name: Rentals feed integrations
+      contact: rentalfeeds@zillow.com
+      evidence: https://www.zillowgroup.com/developers/api/rentals/lead-api/
+    - name: Reviews API
+      note: >-
+        Zillow Group states plainly "At this time, the Review API is self serve and we are
+        unable to assist with implementation questions."
+      evidence: https://www.zillowgroup.com/developers/api/mls-broker-data/reviews-api/
+changelog:
+  published: false
+  note: >-
+    Zillow Group publishes no changelog for its developer portal. The only dated change history
+    on the surface belongs to the dotloop subsidiary
+    (https://dotloop.github.io/public-api/, "Last updated 2026-03-06"), and is recorded in
+    all/dotloop rather than duplicated here. No `ChangeLog` pointer is emitted.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

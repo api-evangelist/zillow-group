@@ -1,64 +1,362 @@
 aid: zillow-group
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/zillow-group/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/zillow-group/refs/heads/main/apis.yml
 common:
-  - type: DomainSecurity
-    url: security/zillow-group-domain-security.yml
-  - type: GitHubOrganization
-    url: https://github.com/zillow
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/zillow-group
-  - url: https://www.zillowgroup.com/feed/
-    type: Blog
+- type: Website
+  url: https://www.zillowgroup.com/
+- type: DomainSecurity
+  url: security/zillow-group-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/zillow
+- type: LinkedIn
+  url: https://www.linkedin.com/company/zillow-group
+- url: https://www.zillowgroup.com/feed/
+  type: Blog
+- type: DeveloperPortal
+  url: https://www.zillowgroup.com/developers/
+- type: Documentation
+  url: https://www.zillowgroup.com/developers/
+- type: APIReference
+  url: https://bridgedataoutput.com/docs/platform
+- type: Authentication
+  url: authentication/zillow-group-authentication.yml
+- type: Conventions
+  url: conventions/zillow-group-conventions.yml
+- type: Conformance
+  url: conformance/zillow-group-conformance.yml
+- type: Lifecycle
+  url: lifecycle/zillow-group-lifecycle.yml
+- type: Packages
+  url: packages/zillow-group-packages.yml
+- type: Plans
+  url: plans/zillow-group-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/zillow-group-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/zillow-group-webhooks.yml
+- type: LLMsTxt
+  url: llms/zillow-group-llms.txt
+- type: VulnerabilityDisclosure
+  url: security/zillow-group-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.zillow.com/corporate/security-disclosure/
+- type: TermsOfService
+  url: https://www.zillow.com/corporate/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.zillow.com/corporate/zg-privacy-notice/
+- type: Support
+  url: https://help.zillowrentalmanager.com/hc/en-us
 apis:
-  - aid: zillow-group:zillow-group
-    name: Zillow Group
-    tags:
-      - Real-Estate
-    tags_raw:
-      - Real Estate
-    humanURL: https://www.zillowgroup.com/developers/
-    properties:
-      - url: https://www.zillowgroup.com/developers/
-        type: Documentation
-    description: >-
-      Zillow Group is a leading real estate technology company that operates a suite
-      of online platforms and services designed to make the process of buying, selling,
-      renting, and financing homes easier and more efficient. The company's flagship
-      website, Zillow.com, offers a comprehensive database of real estate listings,
-      along with tools for researching property values, finding agents, and connecting
-      with mortgage lenders.
+- aid: zillow-group:zestimates-api
+  name: Zillow Zestimate API
+  description: RESTful JSON API returning Zillow property, rental and foreclosure Zestimates for approximately
+    100 million US properties. Zillow Group documents it on its own developer portal and routes the reference
+    and access-token issuance to the Bridge platform, a Zillow Group company, which is why the base host
+    is bridgedataoutput.com rather than a zillow.com host. Access is invite-only through the Zillow Group
+    Datasets agreement.
+  humanURL: https://www.zillowgroup.com/developers/api/zestimate/zestimates-api/
+  baseURL: https://api.bridgedataoutput.com/api/v2
+  tags:
+  - Valuation
+  - Property Data
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/zestimate/zestimates-api/
+  - type: APIReference
+    url: https://bridgedataoutput.com/docs/platform/#zestimates
+- aid: zillow-group:public-records-api
+  name: Zillow Public Records API
+  description: RESTful JSON API over parcel, assessment and transaction records covering roughly 148 million
+    properties across about 3,200 US counties, with around 15 years of history. Documented by Zillow Group
+    and served through the Bridge platform, a Zillow Group company. Invite-only, commercial use; academic
+    users are directed to the free Zillow Research CSV downloads instead.
+  humanURL: https://www.zillowgroup.com/developers/api/public-data/public-records-api/
+  baseURL: https://api.bridgedataoutput.com/api/v2
+  tags:
+  - Public Records
+  - Property Data
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/public-data/public-records-api/
+  - type: APIReference
+    url: https://bridgedataoutput.com/docs/platform/#parcels
+- aid: zillow-group:mls-listings-api
+  name: Zillow Group MLS Listings API
+  description: RESTful JSON listing API serving MLS and broker data normalized to the RESO Data Dictionary
+    standard. Documented by Zillow Group and served through the Bridge platform, a Zillow Group company.
+    Access is invitation-only and granted by Zillow Group MLS partners in the US and Canada at their discretion.
+  humanURL: https://www.zillowgroup.com/developers/api/mls-broker-data/mls-listings/
+  baseURL: https://api.bridgedataoutput.com/api/v2
+  tags:
+  - MLS
+  - Listings
+  - RESO
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mls-broker-data/mls-listings/
+  - type: APIReference
+    url: https://bridgedataoutput.com/docs/platform
+  - type: Documentation
+    url: https://bridgedataoutput.com/docs/explorer/reso-web-api
+- aid: zillow-group:reviews-api
+  name: Zillow Reviews API
+  description: Self-serve API for MLS and broker partners to be notified when a prospect creates a review,
+    retrieve prospect reviews in bulk, and respond to them. Access tokens are issued from the Bridge dashboard
+    under Data Access > API Access Tokens. Zillow Group states it is unable to assist with implementation
+    questions for this API.
+  humanURL: https://www.zillowgroup.com/developers/api/mls-broker-data/reviews-api/
+  baseURL: https://api.bridgedataoutput.com/api/v2
+  tags:
+  - Reviews
+  - Agents
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mls-broker-data/reviews-api/
+  - type: APIReference
+    url: https://bridgedataoutput.com/docs/platform
+  - type: SignUp
+    url: https://bridgedataoutput.com/register
+- aid: zillow-group:agent-reviews-api
+  name: Zillow Agent Reviews API
+  description: Web-service API returning Zillow agent review data as JSON from URI query-string requests,
+    authenticated with an API key issued on the Bridge dashboard. Governed by the Zillow Data Terms of
+    Use with branding requirements attached to display of the reviews.
+  humanURL: https://www.zillowgroup.com/developers/api/agents/agent-reviews/
+  baseURL: https://api.bridgedataoutput.com/api/v2
+  tags:
+  - Reviews
+  - Agents
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/agents/agent-reviews/
+  - type: APIReference
+    url: https://bridgedataoutput.com/docs/platform/API/zg-data#agent-reviews
+- aid: zillow-group:rate-cloud-api
+  name: Mortech Rate Cloud API
+  description: Read-only mortgage pricing API from Mortech, a Zillow Group company, allowing online lead
+    generators to submit loan criteria over HTTP POST and receive lender pricing back as JSON. Authenticated
+    with a third-party name and license key under a Partner/MSA agreement. Zillow Group publishes no base
+    URL for this API.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/rate-cloud-api/
+  tags:
+  - Mortgage
+  - Rates
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/rate-cloud-api/
+- aid: zillow-group:prospect-sync-api
+  name: Mortech Prospect Sync API
+  description: Read/write API from Mortech, a Zillow Group company, for sending and receiving updates
+    on pricing activity for every prospect in the Mortech system. Requests are HTTP POST and responses
+    are XML, authenticated with a third-party name and license key under a Partner/MSA agreement. No base
+    URL is published.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/prospect-sync-api/
+  tags:
+  - Mortgage
+  - Leads
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/prospect-sync-api/
+- aid: zillow-group:prospect-trigger-api
+  name: Mortech Prospect Trigger API
+  description: Mortech prospect trigger API, part of the Zillow Group mortgage developer program alongside
+    Prospect Sync and Rate Cloud. Access is requested through the Zillow Group developer portal under
+    a Partner/MSA agreement; no base URL or reference documentation is published publicly.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/prospect-trigger-api/
+  tags:
+  - Mortgage
+  - Leads
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/prospect-trigger-api/
+- aid: zillow-group:lead-posting-api
+  name: Mortech Lead Posting API
+  description: Read/write API from Mortech, a Zillow Group company, allowing partners to submit prospect
+    information for pricing and lead routing. Requests are HTTP POST and responses are XML, authenticated
+    with a third-party name and license key. No reversal, cancellation or deduplication mechanism is documented
+    for a submitted lead.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/lead-posting-api/
+  tags:
+  - Mortgage
+  - Leads
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/lead-posting-api/
+- aid: zillow-group:los-plug-in-integration-api
+  name: Mortech LOS Plug-In Integration API
+  description: Integration API from Mortech, a Zillow Group company, for connecting loan origination systems
+    to Mortech pricing. Listed on the Zillow Group mortgage developer program with a request-access form;
+    no base URL or public reference is published.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/los-plug-in-integration-api/
+  tags:
+  - Mortgage
+  - Integration
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/los-plug-in-integration-api/
+- aid: zillow-group:lender-reviews-api
+  name: Zillow Lender Reviews API
+  description: API for accessing Zillow lender review data, listed under the Zillow Group mortgage developer
+    program. Access is requested through the Zillow Group developer portal; no base URL or public reference
+    documentation is published.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/zillow-lender-reviews/
+  tags:
+  - Mortgage
+  - Reviews
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/zillow-lender-reviews/
+- aid: zillow-group:get-current-rates-api
+  name: Zillow Get Current Rates API
+  description: API for retrieving current mortgage rate data, listed under the Zillow Group mortgage developer
+    program. Access is requested through the Zillow Group developer portal; no base URL or public reference
+    documentation is published.
+  humanURL: https://www.zillowgroup.com/developers/api/mortgage/get-current-rates/
+  tags:
+  - Mortgage
+  - Rates
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/mortgage/get-current-rates/
+- aid: zillow-group:rentals-lead-api
+  name: Zillow Rentals Lead API
+  description: Outbound webhook API that delivers Zillow Rentals lead information to a customer-supplied
+    endpoint as URL-encoded HTTP POST callbacks. Zillow Group states the data format is fixed and that
+    it cannot change API fields or the form. No inbound authentication, callback signature or retry policy
+    is documented, and the only integration guide is a PDF.
+  humanURL: https://www.zillowgroup.com/developers/api/rentals/lead-api/
+  tags:
+  - Rentals
+  - Leads
+  - Webhooks
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/rentals/lead-api/
+  - type: Documentation
+    url: https://s3.amazonaws.com/files.hotpads.com/+guides/Lead+API+Guide.pdf
+  - type: Webhooks
+    url: asyncapi/zillow-group-webhooks.yml
+  - type: Support
+    url: https://help.zillowrentalmanager.com/hc/en-us
+- aid: zillow-group:rentals-feed-integrations
+  name: Zillow Rentals Feed Integrations
+  description: Rental listing feed ingestion for property managers and rental software partners, documented
+    under the Zillow Group rentals developer program. A feed-delivery integration rather than a keyed
+    request/response API; onboarding runs through rentalfeeds@zillow.com.
+  humanURL: https://www.zillowgroup.com/developers/api/rentals/rentals-feed-integrations/
+  tags:
+  - Rentals
+  - Listings
+  - Feeds
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/rentals/rentals-feed-integrations/
+- aid: zillow-group:transaction-management-api
+  name: dotloop Transaction Management API
+  description: RESTful JSON CRUD API for real-estate transaction management - loops, loop details, folders,
+    documents, participants, tasks, activities, contacts and loop templates - secured with three-legged
+    OAuth 2.0. Served by dotloop, a Zillow Group company, on api-gateway.dotloop.com; Zillow Group lists
+    it as one of its own developer APIs and links the dotloop reference directly, which is why the base
+    host differs from zillowgroup.com. The full contract is profiled separately in the dotloop repo.
+  humanURL: https://www.zillowgroup.com/developers/api/transactions/transaction-management/
+  baseURL: https://api-gateway.dotloop.com/public/v2
+  tags:
+  - Transactions
+  - Documents
+  - E-Signature
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/transactions/transaction-management/
+  - type: APIReference
+    url: https://dotloop.github.io/public-api/
+  - type: Webhooks
+    url: asyncapi/zillow-group-webhooks.yml
+  - type: SignUp
+    url: http://info.dotloop.com/developers
+- aid: zillow-group:real-estate-metrics
+  name: Zillow Real Estate Metrics
+  description: 'Zillow housing market metrics - median home values, rents and inventory - published from
+    the national level down to the neighborhood level. Despite being listed as an API on the Zillow Group
+    developer portal, the architectural style Zillow Group states is Download and the format is CSV: it
+    resolves to the free Zillow Research data portal rather than a keyed endpoint.'
+  humanURL: https://www.zillowgroup.com/developers/api/public-data/real-estate-metrics/
+  tags:
+  - Housing Data
+  - Research
+  - Open Data
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/public-data/real-estate-metrics/
+  - type: Documentation
+    url: https://www.zillow.com/research/data/
+- aid: zillow-group:neighborhood-data
+  name: Zillow Neighborhood Data
+  description: Aggregate neighborhood-level housing statistics from Zillow, listed on the Zillow Group
+    developer portal but delivered as free CSV downloads through the Zillow Research data portal rather
+    than as a keyed API. No endpoint, authentication or response schema is published.
+  humanURL: https://www.zillowgroup.com/developers/api/public-data/neighborhood-data/
+  tags:
+  - Housing Data
+  - Research
+  - Open Data
+  properties:
+  - type: Documentation
+    url: https://www.zillowgroup.com/developers/api/public-data/neighborhood-data/
+  - type: Documentation
+    url: https://www.zillow.com/research/data/
 name: Zillow Group
 tags:
-  - Real-Estate
+- Real-Estate
+- Property-Data
+- MLS
+- Mortgage
+- Rentals
+- Valuation
+- Housing-Data
+- Transaction-Management
 tags_raw:
-  - Real Estate
+- Real Estate
+- Property Data
+- MLS
+- Mortgage
+- Rentals
+- Valuation
+- Housing Data
+- Transaction Management
 type: Index
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: unknown
+  onboarding: approval
   trial: false
   try_now: false
   public: false
-  label: Freemium
-  confidence: medium
+  label: Requires approval
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - authentication
+  generated: '2026-08-28'
+  method: searched
+  note: Corrected 2026-08-28 from a derived 'Paid - Self-serve signup', which came from a 2026-05-04 finops/plans
+    scaffold rather than from Zillow Group. Every one of the seventeen APIs on https://www.zillowgroup.com/developers/
+    stands behind a Request Access form or an invite-only data agreement, and no price, tier or free allowance
+    is published for any of them, so pricing is unknown and onboarding is approval. Re-running derive-access-model.py
+    will revert this until the finops scaffold is reconciled.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zillow-group.png
 access: 3rd-Party
 created: '2025-03-01'
-modified: '2026-03-16'
+modified: '2026-08-28'
 position: Consumer
-description: >-
-  Zillow Group is a leading real estate and rental marketplace that aims to make the
-  process of buying, selling, and renting homes more streamlined and efficient. The
-  company offers a wide range of services, including an online platform where users
-  can search for properties, view listings, and connect with real estate agents. Zillow
-  Group also provides tools and resources for homeowners, such as Zestimate, an automated
-  valuation model that estimates the market value of a property.
+description: Zillow Group is a leading real estate and rental marketplace that aims to make the process
+  of buying, selling, and renting homes more streamlined and efficient. The company offers a wide range
+  of services, including an online platform where users can search for properties, view listings, and
+  connect with real estate agents. Zillow Group also provides tools and resources for homeowners, such
+  as Zestimate, an automated valuation model that estimates the market value of a property.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-enrichment:
+  date: '2026-08-28'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

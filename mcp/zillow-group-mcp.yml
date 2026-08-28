@@ -1,0 +1,47 @@
+generated: '2026-08-28'
+method: searched
+status: none
+source: >-
+  https://github.com/zillow (org listing), https://github.com/zillow/auto-mobile,
+  https://registry.npmjs.org/auto-mobile, https://www.zillowgroup.com/developers/
+description: >-
+  MCP posture for Zillow Group. Zillow Group ships NO Model Context Protocol server for any
+  of the seventeen APIs on its developer portal — there is no hosted endpoint an agent can
+  POST to, and no stdio package that wraps Zillow data. The one MCP artifact the company
+  ever published, AutoMobile, is an internal mobile-test-automation tool: it drives Android
+  devices, not Zillow's real-estate, mortgage, rentals or transaction APIs, and Zillow has
+  since archived it. No `MCPServer` pointer is emitted in apis.yml, because that pointer
+  asserts an agent surface onto the provider's API — and none exists.
+deployment:
+  mode: none
+  endpoint:
+  install:
+  package:
+  auth: unknown
+  verified: searched
+  note: >-
+    mode is `none` for Zillow Group's API surface. AutoMobile below is a real first-party
+    local-stdio MCP package, but it is developer tooling unrelated to any Zillow Group API,
+    and it is archived — so it does not make Zillow Group's APIs reachable by an agent.
+published_mcp_artifacts:
+  - name: AutoMobile
+    repo: https://github.com/zillow/auto-mobile
+    package: https://www.npmjs.com/package/auto-mobile
+    registry: npm
+    version: 0.0.5
+    published: '2025-07-22'
+    transport: stdio
+    scope: mobile UI automation for Android (actions + observations as MCP tool calls)
+    exposes_zillow_api: false
+    archived: true
+    archived_note: >-
+      The repository states "AutoMobile is no longer maintained or supported by Zillow" and
+      directs users to a community fork at https://github.com/kaeawc/auto-mobile.
+tools: []
+candidate_tools_note: >-
+  No candidate tool list was derived. Deriving MCP tools requires an OpenAPI to bind them to,
+  and Zillow Group publishes no machine-readable contract on any host — see
+  x-coverage in apis.yml and the contract-discovery probes in well-known/.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

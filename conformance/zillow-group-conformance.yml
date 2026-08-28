@@ -1,0 +1,102 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://www.zillowgroup.com/developers/ (per-API fact panels),
+  https://bridgedataoutput.com/docs/explorer/reso-web-api,
+  https://dotloop.github.io/public-api/
+description: >-
+  Standards conformance for the Zillow Group API surface. Assertions here are read from what
+  Zillow Group and its API-serving subsidiaries state on their own pages; nothing is derived
+  from a specification, because Zillow Group publishes none.
+standards:
+  - id: reso-data-dictionary
+    name: RESO Data Dictionary
+    domain_standard: true
+    conforms: true
+    evidence: >-
+      Zillow Group's MLS Listings API page states the API serves "normalized data conforming to
+      the RESO data dictionary standard" —
+      https://www.zillowgroup.com/developers/api/mls-broker-data/mls-listings/
+    why_it_matters: >-
+      RESO is the domain standard of US/Canadian residential real estate. An MLS integrator who
+      already speaks RESO can consume Zillow Group's listing feed with no bespoke connector.
+  - id: reso-web-api
+    name: RESO Web API (OData-based)
+    domain_standard: true
+    conforms: true
+    evidence: >-
+      The Bridge platform Zillow Group routes its MLS/Zestimate/Public Records APIs through
+      publishes a RESO Web API surface at https://bridgedataoutput.com/docs/explorer/reso-web-api
+      alongside its proprietary Bridge Web API.
+    note: >-
+      Served by Bridge Interactive, a Zillow Group company. The RESO Web API is profiled in
+      depth in all/bridge-interactive; recorded here because Zillow Group's own developer
+      portal names it as the delivery surface for Zillow Group Datasets.
+  - id: odata
+    name: OData
+    conforms: true
+    evidence: RESO Web API is an OData profile; inherited via the Bridge RESO Web API surface above.
+    confidence: medium
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      Transaction Management API is "OAuth 2.0 / 3-legged OAuth"; the reference documents
+      authorization-code, refresh-token and revocation flows and cites RFC 6749 directly.
+    scope: Transaction Management API only — no other Zillow Group API uses OAuth.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: >-
+      No /.well-known/openid-configuration is served on any Zillow Group or subsidiary host
+      (probed 2026-08-28, all 404/401/403 — see well-known/zillow-group-well-known.yml).
+  - id: rfc9457-problem-details
+    name: RFC 9457 Problem Details
+    conforms: false
+    evidence: >-
+      No Zillow Group API documents application/problem+json. The one documented error envelope
+      on the surface (Transaction Management) uses a JSON:API-shaped `errors[]` array instead.
+  - id: jsonapi-errors
+    name: 'JSON:API error object shape'
+    conforms: partial
+    evidence: >-
+      Transaction Management errors are an `errors[]` array of {code, source:{pointer|parameter},
+      detail} objects — the JSON:API error object shape — but the success payloads are not
+      JSON:API documents.
+    confidence: medium
+  - id: rfc9116-security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: >-
+      Probed on seven hosts 2026-08-28; none serves /.well-known/security.txt. Zillow does
+      publish an equivalent policy as an HTML page instead.
+  - id: rfc8594-sunset-header
+    name: RFC 8594 Sunset header
+    conforms: false
+    evidence: No deprecation or sunset header policy is published anywhere on the Zillow Group developer portal.
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: >-
+      Contract discovery on 2026-08-28 probed /openapi.json, /openapi.yaml and /swagger.json on
+      www.zillowgroup.com, www.zillow.com, api-gateway.dotloop.com and dotloop.github.io — all
+      404, 401 or an HTML shell. No OpenAPI is published for any Zillow Group API.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >-
+      Two webhook surfaces exist (Rentals Lead API, Transaction Management) but neither ships an
+      AsyncAPI document. See asyncapi/zillow-group-webhooks.yml.
+  - id: fhir-r4
+    conforms: false
+    evidence: Out of domain — Zillow Group is a real-estate marketplace.
+compliance_program:
+  published: false
+  note: >-
+    No trust center, SOC 2 / ISO 27001 attestation page or certification list is published on
+    any Zillow Group host. https://trust.zillow.com, https://trust.zillowgroup.com and
+    https://security.zillowgroup.com do not resolve (probed 2026-08-28). No `Compliance` or
+    `TrustCenter` pointer is emitted.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

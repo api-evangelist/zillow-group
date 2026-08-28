@@ -1,0 +1,128 @@
+generated: '2026-08-28'
+method: probed
+source: live HTTPS probes of every Zillow Group corporate, developer-portal and API host
+description: >-
+  Well-known discovery probe for Zillow Group. Every documented Zillow Group API host and
+  the corporate/developer hosts were probed for the RFC 8615 discovery surface. Nothing is
+  served: zillowgroup.com answers its WordPress 404 page for every path, zillow.com is
+  behind a PerimeterX edge, the dotloop API gateway 401s every path (including
+  /.well-known/*), and bridgedataoutput.com is a single-page-app catch-all that answers
+  200 with the same 1,736-byte HTML shell for EVERY path — including a random control
+  path that cannot exist. No pointer is emitted: this file records an absence.
+hit_count: 0
+soft_404_control:
+  host: bridgedataoutput.com
+  path: /.well-known/zz-api-evangelist-control-<random>
+  status: 200
+  bytes: 1736
+  note: >-
+    Identical byte count and body to every /.well-known/* path probed on this host, so its
+    200s are a catch-all shell and not served documents. Treated as misses.
+hosts:
+  - host: https://www.zillowgroup.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.zillow.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api-gateway.dotloop.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/openid-configuration
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+      - path: /.well-known/oauth-protected-resource
+        status: 401
+      - path: /.well-known/api-catalog
+        status: 401
+      - path: /.well-known/agent-card.json
+        status: 401
+      - path: /.well-known/agent.json
+        status: 401
+  - host: https://auth.dotloop.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api.bridgedataoutput.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/agent-card.json
+        status: 403
+      - path: /.well-known/agent.json
+        status: 403
+  - host: https://bridgedataoutput.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: SPA catch-all shell, not a document — see soft_404_control
+      - path: /.well-known/api-catalog
+        status: 200
+        note: SPA catch-all shell, not a document — see soft_404_control
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA catch-all shell, not a document — see soft_404_control
+  - host: https://dotloop.github.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+notes:
+  - >-
+    An A2A agent card was probed at both the canonical /.well-known/agent-card.json and the
+    legacy /.well-known/agent.json on every host above. No host returned a JSON AgentCard
+    object, so no a2a/ artifact was authored — per pipeline rule, agent cards are search-only.
+  - >-
+    Zillow does publish a vulnerability disclosure policy, but as an HTML page at
+    https://www.zillow.com/corporate/security-disclosure/ rather than an RFC 9116
+    /.well-known/security.txt. See security/zillow-group-vulnerability-disclosure.yml.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,98 @@
+generated: '2026-08-28'
+method: searched
+source: https://www.zillowgroup.com/developers/
+description: >-
+  Cross-cutting runtime semantics for the Zillow Group API surface. This file is mostly a
+  record of absences, and that is the finding: Zillow Group's developer portal is a directory
+  of seventeen request-access APIs with per-API fact panels (auth, style, request format,
+  response format) and no cross-cutting contract at all. An agent integrating here cannot
+  learn the pagination style, the error envelope, the retry signal or the reversal path from
+  anything Zillow Group publishes.
+auth_style:
+  summary: Four different schemes across four platforms; no single Zillow Group model.
+  see: authentication/zillow-group-authentication.yml
+idempotency:
+  supported: false
+  documented: false
+  header: null
+  note: >-
+    No idempotency key, safe-retry guarantee or replay-window is documented for any Zillow Group
+    write surface — including the Mortech Lead Posting API, which submits prospect records, and
+    the Rentals Lead API, which delivers HTTP POST callbacks with no documented deduplication
+    identifier. No `Idempotency` pointer is emitted.
+pagination:
+  documented: false
+  note: >-
+    Zillow Group documents no pagination convention. Of the subsidiary platforms, dotloop uses
+    batch_size (default 20, max 100) + batch_number for collections and an opaque next_cursor
+    for webhook subscriptions and events; Bridge paginates its own way. Neither is stated on a
+    Zillow Group page.
+field_expansion:
+  documented: false
+metadata:
+  documented: false
+request_id_tracing:
+  documented: false
+  note: No correlation or request-id header is documented on any Zillow Group API page.
+versioning:
+  see: lifecycle/zillow-group-lifecycle.yml
+error_envelope:
+  documented: false
+  note: >-
+    No error catalog, status-code table or error envelope is published at the Zillow Group
+    level. Response formats are stated per API only as "JSON" or "XML".
+rate_limit_signaling:
+  documented: false
+  note: >-
+    No rate-limit numbers and no rate-limit response headers are published on any Zillow Group
+    developer page. See rate-limits/zillow-group-rate-limits.yml.
+dry_run_mode:
+  supported: false
+  documented: false
+  note: No sandbox, test mode, test credentials or dry-run parameter is published for any Zillow Group API.
+reversibility:
+  status: undocumented
+  grade: null
+  has_write_surface: true
+  note: >-
+    Zillow Group operates real write surfaces and documents no way to take an action back.
+    Nothing on the developer portal names a cancel, void, reverse, undo, rollback or restore
+    operation, and no reversal window is stated anywhere. An agent acting on these APIs cannot
+    determine, before it acts, whether the action is recoverable.
+  write_surfaces:
+    - api: Lead Posting API (Mortech)
+      operation: HTTP POST submission of prospect information for pricing and lead routing
+      reversal_operation: null
+      window: null
+      docs: https://www.zillowgroup.com/developers/api/mortgage/lead-posting-api/
+    - api: Prospect Sync API (Mortech)
+      operation: Read/write updates on pricing activity per prospect
+      reversal_operation: null
+      window: null
+      docs: https://www.zillowgroup.com/developers/api/mortgage/prospect-sync-api/
+    - api: Reviews API
+      operation: Respond to a prospect review
+      reversal_operation: null
+      window: null
+      docs: https://www.zillowgroup.com/developers/api/mls-broker-data/reviews-api/
+    - api: Transaction Management API (dotloop)
+      operation: Create and update loops, folders, documents, participants, contacts
+      reversal_operation: >-
+        DELETE exists for loop participants, contacts and webhook subscriptions, and archiving
+        was added for folders and documents (2025-07-17). These are the closest thing to a
+        reversal path on the surface.
+      window: null
+      window_note: >-
+        No restore window is stated for archived folders or documents, and no undo exists for a
+        created or updated loop. Recorded as a reversal path without a window, deliberately not
+        graded `verified`.
+      docs: https://dotloop.github.io/public-api/
+cross_links:
+  authentication: authentication/zillow-group-authentication.yml
+  rate_limits: rate-limits/zillow-group-rate-limits.yml
+  lifecycle: lifecycle/zillow-group-lifecycle.yml
+  webhooks: asyncapi/zillow-group-webhooks.yml
+  conformance: conformance/zillow-group-conformance.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
