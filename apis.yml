@@ -227,6 +227,10 @@ apis:
   tags:
   - Rentals
   - Leads
+  - Webhook
+  tags_raw:
+  - Rentals
+  - Leads
   - Webhooks
   properties:
   - type: Documentation
@@ -260,6 +264,10 @@ apis:
   humanURL: https://www.zillowgroup.com/developers/api/transactions/transaction-management/
   baseURL: https://api-gateway.dotloop.com/public/v2
   tags:
+  - Transaction
+  - Documents
+  - E-Signature
+  tags_raw:
   - Transactions
   - Documents
   - E-Signature
@@ -280,6 +288,10 @@ apis:
     resolves to the free Zillow Research data portal rather than a keyed endpoint.'
   humanURL: https://www.zillowgroup.com/developers/api/public-data/real-estate-metrics/
   tags:
+  - Housing-Data
+  - Research
+  - Open Data
+  tags_raw:
   - Housing Data
   - Research
   - Open Data
@@ -295,6 +307,10 @@ apis:
     than as a keyed API. No endpoint, authentication or response schema is published.
   humanURL: https://www.zillowgroup.com/developers/api/public-data/neighborhood-data/
   tags:
+  - Housing-Data
+  - Research
+  - Open Data
+  tags_raw:
   - Housing Data
   - Research
   - Open Data
@@ -306,13 +322,13 @@ apis:
 name: Zillow Group
 tags:
 - Real-Estate
-- Property-Data
+- Property Data
 - MLS
 - Mortgage
 - Rentals
 - Valuation
 - Housing-Data
-- Transaction-Management
+- Transaction Management
 tags_raw:
 - Real Estate
 - Property Data
