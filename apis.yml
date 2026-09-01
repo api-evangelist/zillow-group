@@ -288,7 +288,7 @@ apis:
     resolves to the free Zillow Research data portal rather than a keyed endpoint.'
   humanURL: https://www.zillowgroup.com/developers/api/public-data/real-estate-metrics/
   tags:
-  - Housing-Data
+  - Housing Data
   - Research
   - Open Data
   tags_raw:
@@ -307,7 +307,7 @@ apis:
     than as a keyed API. No endpoint, authentication or response schema is published.
   humanURL: https://www.zillowgroup.com/developers/api/public-data/neighborhood-data/
   tags:
-  - Housing-Data
+  - Housing Data
   - Research
   - Open Data
   tags_raw:
@@ -327,7 +327,7 @@ tags:
 - Mortgage
 - Rentals
 - Valuation
-- Housing-Data
+- Housing Data
 - Transaction Management
 tags_raw:
 - Real Estate
