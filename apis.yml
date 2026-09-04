@@ -361,6 +361,7 @@ accessModel:
   source:
   - plans
   - authentication
+  - {url: 'https://www.zillowgroup.com/', status: 302, note: 'declared website redirects to https://www.zillow.com/news/ — a different registrable domain (zillowgroup.com -> zillow.com), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
   generated: '2026-08-28'
   method: searched
   note: Corrected 2026-08-28 from a derived 'Paid - Self-serve signup', which came from a 2026-05-04 finops/plans
@@ -372,7 +373,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zillow-gro
 access: 3rd-Party
 created: '2025-03-01'
 modified: '2026-08-28'
-position: Consumer
+position: Consuming
 description: Zillow Group is a leading real estate and rental marketplace that aims to make the process
   of buying, selling, and renting homes more streamlined and efficient. The company offers a wide range
   of services, including an online platform where users can search for properties, view listings, and
