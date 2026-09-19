@@ -250,6 +250,10 @@ apis:
   tags:
   - Rentals
   - Listings
+  - Feed
+  tags_raw:
+  - Rentals
+  - Listings
   - Feeds
   properties:
   - type: Documentation
