@@ -45,6 +45,10 @@ common:
   url: https://www.zillow.com/corporate/zg-privacy-notice/
 - type: Support
   url: https://help.zillowrentalmanager.com/hc/en-us
+- type: Blog
+  url: https://www.zillow.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/zillowgroup
 apis:
 - aid: zillow-group:zestimates-api
   name: Zillow Zestimate API
@@ -323,9 +327,40 @@ apis:
     url: https://www.zillowgroup.com/developers/api/public-data/neighborhood-data/
   - type: Documentation
     url: https://www.zillow.com/research/data/
+- aid: zillow-group:bridge-interactive-api
+  name: Bridge Interactive API
+  description: Bridge Interactive is Zillow Group's RESO-compliant data distribution platform for MLSs,
+    brokers, and approved vendors. It exposes a RESO Web API (OData-based) for searching listings, members,
+    offices, media, and other RESO Data Dictionary resources, plus a Listing Output service for bulk replication.
+    Access requires MLS approval and is gated per data feed.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://bridgedataoutput.com/docs/platform/
+  baseURL: https://api.bridgedataoutput.com
+  tags:
+  - Bridge
+  - Listings
+  - MLS
+  - OData
+  - Real Estate
+  - RESO
+  tags_raw:
+  - Bridge
+  - Listings
+  - MLS
+  - OData
+  - Real Estate
+  - RESO
+  - Real-Estate
+  properties:
+  - type: Documentation
+    url: https://bridgedataoutput.com/docs/platform/
+  - type: Portal
+    url: https://bridgedataoutput.com
+  - type: Authentication
+    url: https://bridgedataoutput.com/docs/platform/?ref=authentication
 name: Zillow Group
 tags:
-- Real-Estate
+- Real Estate
 - Property Data
 - MLS
 - Mortgage
@@ -333,6 +368,9 @@ tags:
 - Valuation
 - Housing Data
 - Transaction Management
+- Listings
+- RESO
+- IDX
 tags_raw:
 - Real Estate
 - Property Data
@@ -342,6 +380,10 @@ tags_raw:
 - Valuation
 - Housing Data
 - Transaction Management
+- Real-Estate
+- Listings
+- RESO
+- IDX
 type: Index
 deliveryModel:
   model: saas
