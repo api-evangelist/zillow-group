@@ -1,6 +1,8 @@
 aid: zillow-group
 url: https://raw.githubusercontent.com/api-evangelist/zillow-group/refs/heads/main/apis.yml
 common:
+- type: FinOps
+  url: finops/zillow-group-finops.yml
 - type: Website
   url: https://www.zillowgroup.com/
 - type: DomainSecurity
