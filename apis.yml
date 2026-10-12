@@ -5,6 +5,8 @@ common:
   url: finops/zillow-group-finops.yml
 - type: Website
   url: https://www.zillowgroup.com/
+- type: Website
+  url: https://www.zillow.com/
 - type: DomainSecurity
   url: security/zillow-group-domain-security.yml
 - type: GitHubOrganization
